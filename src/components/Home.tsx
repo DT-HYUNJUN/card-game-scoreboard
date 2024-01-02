@@ -1,12 +1,13 @@
-import { IName } from "../types";
-import Table from "./GameTable";
+import GameTable from "./GameTable";
 
 interface Props {
-  names: IName[];
+  names: string[];
+  addName: (targetName: string) => void;
+  deleteName: (targetName: string) => void;
 }
 
 const Home = (props: Props) => {
-  return <Table />;
+  return <GameTable names={props.names} addName={props.addName} deleteName={props.deleteName} />;
 };
 
 export default Home;
