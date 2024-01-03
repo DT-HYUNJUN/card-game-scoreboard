@@ -1,18 +1,27 @@
 import styled from "styled-components";
 import Home from "./components/Home";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { INameObj } from "./types";
 
-const namesData = ["park", "kim", "lee"];
+const namesData = [
+  { id: 0, name: "park" },
+  { id: 1, name: "kim" },
+  { id: 2, name: "lee" },
+];
 
 function App() {
-  const [names, setNames] = useState<string[]>(namesData);
+  const [names, setNames] = useState<INameObj[]>(namesData);
+
+  const idRef = useRef(3);
 
   const addName = (targetName: string) => {
-    setNames([...namesData, targetName]);
+    setNames((prevNames) => [...prevNames, { id: idRef.current, name: targetName }]);
+    idRef.current += 1;
+    console.log(names);
   };
 
   const deleteName = (targetName: string) => {
-    setNames(names.filter((name) => name !== targetName));
+    setNames(names.filter((it) => it.name !== targetName));
   };
 
   return (

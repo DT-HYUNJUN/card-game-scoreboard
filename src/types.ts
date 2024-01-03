@@ -1,3 +1,4 @@
-export interface IName {
+export interface INameObj {
+  id: number;
   name: string;
 }

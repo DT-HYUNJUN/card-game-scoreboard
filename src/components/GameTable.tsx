@@ -2,23 +2,25 @@ import { Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { INameObj } from "../types";
 
 interface Props {
-  names: string[];
+  names: INameObj[];
   addName: (targetName: string) => void;
   deleteName: (targetName: string) => void;
 }
 
-function createData(name: string) {
-  return { name };
+function createData(id: number, name: string) {
+  return { id, name };
 }
 
-const rows = [createData("Frozen yoghurt"), createData("Ice cream sandwich"), createData("Eclair"), createData("Cupcake"), createData("Gingerbread")];
-
 const GameTable = (props: Props) => {
-  const handleClickAdd = () => {};
+  const handleClickAdd = () => {
+    props.addName("addclick");
+  };
   const handleClickDelete = () => {};
 
+  const rows = props.names.map((it) => createData(it.id, "a"));
   return (
     <Container>
       {/* Table */}
@@ -26,16 +28,16 @@ const GameTable = (props: Props) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              {props.names.map((name) => (
-                <TableCell key={name} align="center">
-                  {name}
+              {props.names.map((it) => (
+                <TableCell key={it.id} align="center">
+                  {it.name}
                 </TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+              <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>

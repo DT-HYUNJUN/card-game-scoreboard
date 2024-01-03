@@ -1,7 +1,8 @@
+import { INameObj } from "../types";
 import GameTable from "./GameTable";
 
 interface Props {
-  names: string[];
+  names: INameObj[];
   addName: (targetName: string) => void;
   deleteName: (targetName: string) => void;
 }
