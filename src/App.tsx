@@ -17,7 +17,6 @@ function App() {
   const addName = (targetName: string) => {
     setNames((prevNames) => [...prevNames, { id: idRef.current, name: targetName }]);
     idRef.current += 1;
-    console.log(names);
   };
 
   const deleteName = (targetName: string) => {

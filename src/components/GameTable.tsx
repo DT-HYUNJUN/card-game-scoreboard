@@ -16,7 +16,7 @@ function createData(id: number, name: string) {
 
 const GameTable = (props: Props) => {
   const handleClickAdd = () => {
-    props.addName("addclick");
+    props.addName("addNames");
   };
   const handleClickDelete = () => {};
 
@@ -28,9 +28,10 @@ const GameTable = (props: Props) => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell align="center">판</TableCell>
               {props.names.map((it) => (
                 <TableCell key={it.id} align="center">
-                  {it.name}
+                  <NameInput type="text" value={it.name} />
                 </TableCell>
               ))}
             </TableRow>
@@ -38,9 +39,14 @@ const GameTable = (props: Props) => {
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell component="th" scope="row">
-                  {row.name}
+                <TableCell align="center" component="th" scope="row">
+                  {row.id + 1}
                 </TableCell>
+                {props.names.map((it) => (
+                  <TableCell align="center" component="th" scope="row">
+                    <input type="number" />
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
@@ -68,4 +74,13 @@ const Container = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+`;
+
+const NameInput = styled.input`
+  text-align: center;
+  border: 0;
+  font-size: 20px;
+  &:focus {
+    outline: none;
+  }
 `;
