@@ -1,31 +1,31 @@
 import styled from "styled-components";
 import Home from "./components/Home";
 import { useRef, useState } from "react";
-import { INameObj } from "./types";
+import { IData } from "./types";
 
-const namesData = [
-  { id: 0, name: "park" },
-  { id: 1, name: "kim" },
-  { id: 2, name: "lee" },
+const gameData = [
+  { id: 0, name: "park", game: [] },
+  { id: 1, name: "kim", game: [] },
+  { id: 2, name: "lee", game: [] },
 ];
 
 function App() {
-  const [names, setNames] = useState<INameObj[]>(namesData);
+  const [data, setData] = useState<IData[]>(gameData);
 
   const idRef = useRef(3);
 
   const addName = (targetName: string) => {
-    setNames((prevNames) => [...prevNames, { id: idRef.current, name: targetName }]);
+    setData((prevNames) => [...prevNames, { id: idRef.current, name: targetName, game: [] }]);
     idRef.current += 1;
   };
 
   const deleteName = (targetName: string) => {
-    setNames(names.filter((it) => it.name !== targetName));
+    setData(data.filter((it) => it.name !== targetName));
   };
 
   return (
     <AppContainer>
-      <Home names={names} addName={addName} deleteName={deleteName} />
+      <Home data={data} addName={addName} deleteName={deleteName} />
     </AppContainer>
   );
 }

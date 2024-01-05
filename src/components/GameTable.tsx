@@ -2,10 +2,10 @@ import { Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { INameObj } from "../types";
+import { IData } from "../types";
 
 interface Props {
-  names: INameObj[];
+  data: IData[];
   addName: (targetName: string) => void;
   deleteName: (targetName: string) => void;
 }
@@ -20,7 +20,7 @@ const GameTable = (props: Props) => {
   };
   const handleClickDelete = () => {};
 
-  const rows = props.names.map((it) => createData(it.id, "a"));
+  const rows = props.data.map((it) => createData(it.id, "a"));
   return (
     <Container>
       {/* Table */}
@@ -29,7 +29,7 @@ const GameTable = (props: Props) => {
           <TableHead>
             <TableRow>
               <TableCell align="center">판</TableCell>
-              {props.names.map((it) => (
+              {props.data.map((it) => (
                 <TableCell key={it.id} align="center">
                   <NameInput type="text" value={it.name} />
                 </TableCell>
@@ -42,7 +42,7 @@ const GameTable = (props: Props) => {
                 <TableCell align="center" component="th" scope="row">
                   {row.id + 1}
                 </TableCell>
-                {props.names.map((it) => (
+                {props.data.map((it) => (
                   <TableCell align="center" component="th" scope="row">
                     <input type="number" />
                   </TableCell>
