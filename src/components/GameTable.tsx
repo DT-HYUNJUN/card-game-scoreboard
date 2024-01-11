@@ -2,10 +2,11 @@ import { Fab, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { IData } from "../types";
+import { IPlayer, IScore } from "../types";
 
 interface Props {
-  data: IData[];
+  players: IPlayer[];
+  scores: IScore[];
   addName: (targetName: string) => void;
   deleteName: (targetName: string) => void;
 }
@@ -18,9 +19,13 @@ const GameTable = (props: Props) => {
   const handleClickAdd = () => {
     props.addName("addNames");
   };
+
   const handleClickDelete = () => {};
 
-  const rows = props.data.map((it) => createData(it.id, "a"));
+  const rows = props.players.map((it) => createData(it.id, "a"));
+
+  console.log(props.scores);
+
   return (
     <Container>
       {/* Table */}
@@ -29,7 +34,7 @@ const GameTable = (props: Props) => {
           <TableHead>
             <TableRow>
               <TableCell align="center">판</TableCell>
-              {props.data.map((it) => (
+              {props.players.map((it) => (
                 <TableCell key={it.id} align="center">
                   <NameInput type="text" value={it.name} />
                 </TableCell>
@@ -37,14 +42,26 @@ const GameTable = (props: Props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {/* {rows.map((row) => (
               <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center" component="th" scope="row">
                   {row.id + 1}
                 </TableCell>
-                {props.data.map((it) => (
+                {props.players.map((it) => (
                   <TableCell align="center" component="th" scope="row">
-                    <input type="number" />
+                    <input type="number" readOnly />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))} */}
+            {props.scores.map((it) => (
+              <TableRow key={it.playerId} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                <TableCell align="center" component="th" scope="row">
+                  {it.playerId + 1}
+                </TableCell>
+                {it.scores.map((score) => (
+                  <TableCell key={it.playerId} align="center" component="th" scope="row">
+                    <input type="number" value={score} readOnly />
                   </TableCell>
                 ))}
               </TableRow>

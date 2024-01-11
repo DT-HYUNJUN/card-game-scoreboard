@@ -1,31 +1,40 @@
 import styled from "styled-components";
 import Home from "./components/Home";
 import { useRef, useState } from "react";
-import { IData } from "./types";
+import { IPlayer, IScore } from "./types";
 
-const gameData = [
-  { id: 0, name: "park", game: [] },
-  { id: 1, name: "kim", game: [] },
-  { id: 2, name: "lee", game: [] },
+const playerData = [
+  { id: 0, name: "park" },
+  { id: 1, name: "kim" },
+  { id: 2, name: "lee" },
 ];
 
+const numOfGames = 10;
+
+const initialScores: IScore[] = playerData.map((player) => ({
+  playerId: player.id,
+  playerName: player.name,
+  scores: Array(numOfGames).fill(0),
+}));
+
 function App() {
-  const [data, setData] = useState<IData[]>(gameData);
+  const [players, setPlayers] = useState<IPlayer[]>(playerData);
+  const [scores, setScores] = useState(initialScores);
 
   const idRef = useRef(3);
 
   const addName = (targetName: string) => {
-    setData((prevNames) => [...prevNames, { id: idRef.current, name: targetName, game: [] }]);
+    setPlayers((prevNames) => [...prevNames, { id: idRef.current, name: targetName, game: [] }]);
     idRef.current += 1;
   };
 
   const deleteName = (targetName: string) => {
-    setData(data.filter((it) => it.name !== targetName));
+    setPlayers(players.filter((it) => it.name !== targetName));
   };
 
   return (
     <AppContainer>
-      <Home data={data} addName={addName} deleteName={deleteName} />
+      <Home players={players} scores={scores} addName={addName} deleteName={deleteName} />
     </AppContainer>
   );
 }

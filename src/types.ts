@@ -1,5 +1,10 @@
-export interface IData {
+export interface IPlayer {
   id: number;
   name: string;
-  game: string[];
+}
+
+export interface IScore {
+  playerId: number;
+  playerName: string;
+  scores: number[];
 }
