@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { IPlayer, IScore } from "../types";
+import { useEffect } from "react";
 
 interface Props {
   players: IPlayer[];
@@ -19,6 +20,10 @@ const GameTable = (props: Props) => {
   const handleClickAdd = () => {
     props.addName("addNames");
   };
+
+  useEffect(() => {
+    console.log(props.scores);
+  }, []);
 
   const handleClickDelete = () => {};
 
@@ -54,16 +59,16 @@ const GameTable = (props: Props) => {
                 ))}
               </TableRow>
             ))} */}
-            {props.scores.map((it) => (
-              <TableRow key={it.playerId} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            {props.scores.map((it, idx) => (
+              <TableRow key={idx} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                 <TableCell align="center" component="th" scope="row">
-                  {it.playerId + 1}
+                  1
                 </TableCell>
-                {it.scores.map((score) => (
+                {/* {it.scores.map((score) => (
                   <TableCell key={it.playerId} align="center" component="th" scope="row">
                     <input type="number" value={score} readOnly />
                   </TableCell>
-                ))}
+                ))} */}
               </TableRow>
             ))}
           </TableBody>
